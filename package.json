@@ -20,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/NewteqDeveloper/psychic-enigma/issues"
   },
-  "homepage": "https://github.com/NewteqDeveloper/psychic-enigma#readme"
+  "homepage": "https://github.com/NewteqDeveloper/psychic-enigma#readme",
+  "dependencies": {
+    "@nestjs/typeorm": "^11.0.0",
+    "pg": "^8.14.1",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.22"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
 }
