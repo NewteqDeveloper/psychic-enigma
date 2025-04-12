@@ -12,7 +12,6 @@ const databaseConfig: DataSourceOptions = {
   database: process.env.DB_NAME,
   synchronize: false,
   logging: false,
-  schema: 'matrix',
 };
 
 export default databaseConfig;

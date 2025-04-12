@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Bridge } from '../../../shared-ts/database/models/bridge.model';
 import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class PortService {
   constructor(@InjectRepository(Bridge) private bridge: Repository<Bridge>) {}
 
   async getNextPort(): Promise<number> {
+    //const bridge = EnigmaDataSource.getRepository(Bridge);
+
     const bridgeInfo = await this.bridge.find({
       order: {
         bridgePort: 'desc',
