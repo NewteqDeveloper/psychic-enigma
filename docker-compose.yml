@@ -1,0 +1,11 @@
+# Change name if you need a fresh DB e.g. for testing
+name: psychic-enigma-development
+services:
+  db:
+    image: postgis/postgis:15-3.5-alpine
+    environment:
+      POSTGRES_USER: newteq
+      POSTGRES_PASSWORD: developer
+      POSTGRES_DB: enigma
+    ports:
+      - "5432:5432"

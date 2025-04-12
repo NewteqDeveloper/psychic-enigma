@@ -2,6 +2,11 @@
   "name": "psychic-enigma",
   "version": "0.0.1-alpha",
   "description": "A matrix bridge assistant for multiple users on a home server",
+  "scripts": {
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration:generate": "npm run typeorm -- migration:generate -d shared-ts/database/ormconfig.ts shared-ts/database/migrations/${NAME}",
+    "migration:run": "npm run typeorm -- migration:run -d shared-ts/database/ormconfig.ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NewteqDeveloper/psychic-enigma.git"
@@ -23,11 +28,16 @@
   "homepage": "https://github.com/NewteqDeveloper/psychic-enigma#readme",
   "dependencies": {
     "@nestjs/typeorm": "^11.0.0",
+    "dotenv": "^16.5.0",
     "pg": "^8.14.1",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.22"
   },
   "devDependencies": {
-    "prettier": "^3.5.3"
+    "@tsconfig/node22": "^22.0.1",
+    "@types/node": "^22.14.1",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0"
   }
 }

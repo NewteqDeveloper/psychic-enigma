@@ -1,0 +1,35 @@
+{
+  "extends": "@tsconfig/node22/tsconfig.json",
+  "include": [
+    "./shared-ts/**/*"
+  ],
+  "compilerOptions": {
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "target": "esnext",
+    "noImplicitAny": true,
+    "jsx": "react",
+    "allowJs": false,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "outDir": "./shared-dist",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "resolveJsonModule": true,
+    "inlineSources": true,
+    "baseUrl": "./shared-ts",
+    "sourceRoot": "./shared-ts",
+    "paths": {
+      "shared-ts/*": [
+        "./shared-ts/*"
+      ]
+    }
+  }
+}
