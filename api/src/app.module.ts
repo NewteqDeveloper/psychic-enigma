@@ -1,10 +1,19 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { BridgeModule } from './modules/bridge.module';
+import databaseConfig from '../../shared-ts/database/config';
+import path from 'path';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    TypeOrmModule.forRoot({
+      ...(databaseConfig as TypeOrmModuleOptions),
+      entities: [path.join(__dirname, '../../shared-ts/database/models/*.ts')],
+      synchronize: false,
+    }),
+    BridgeModule,
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

@@ -1,13 +1,20 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Bridge } from './bridge.model';
 
-@Entity({ schema: 'matrix' })
+@Entity()
 export class User {
-  @PrimaryGeneratedColumn({})
+  @PrimaryGeneratedColumn({ name: 'user_pk' })
   id!: number;
 
-  @Column({ length: 255, nullable: false, unique: true })
+  @Column({ nullable: false, unique: true })
   username!: string;
 
   @Column({ nullable: false, unique: true })
   email!: string;
+
+  @Column({ nullable: false, unique: true })
+  password!: string;
+
+  @OneToMany(() => Bridge, (bridge) => bridge.user)
+  bridges!: Bridge[];
 }
