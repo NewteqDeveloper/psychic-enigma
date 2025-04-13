@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { BridgeModule } from './modules/bridge.module';
-import databaseConfig from '../../shared-ts/database/config';
+import { baseDbConfig } from '@shared-ts/database/ormconfig';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      ...(databaseConfig as TypeOrmModuleOptions),
+      ...baseDbConfig,
       schema: 'matrix',
       autoLoadEntities: true,
-      synchronize: false,
     }),
     BridgeModule,
   ],

@@ -4,7 +4,7 @@ import process from 'node:process';
 // this import is key to getting the process.env to have the correct value
 import 'dotenv/config';
 
-export const baseDbConfig: DataSourceOptions = {
+export const baseDbConfig: any = {
   type: 'postgres',
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
@@ -13,7 +13,7 @@ export const baseDbConfig: DataSourceOptions = {
   database: process.env.DB_NAME,
   synchronize: false,
   logging: false,
-};
+} as DataSourceOptions;
 
 export default new DataSource({
   ...baseDbConfig,
