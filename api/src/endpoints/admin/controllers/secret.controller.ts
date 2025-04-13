@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { AdminService } from './admin.service';
+import { AdminService } from '../admin.service';
 import { SecretAuthGuard } from '@auth';
 import { AdminValidateUserDto, CreateUserDto } from '@shared-ts/dto/user.dto';
 
 @Controller('admin/secret')
 @SecretAuthGuard()
-export class AdminSecretController {
+export class SecretController {
   constructor(private readonly adminService: AdminService) {}
 
   @Get()

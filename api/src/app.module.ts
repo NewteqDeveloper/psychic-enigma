@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BridgeModule } from './modules/bridge/bridge.module';
-import { UserModule } from './modules/user/user.module';
 import { baseDbConfig } from '@shared-ts/database/ormconfig';
 import { AuthModule } from './auth/auth.module';
-import {AdminModule} from "./modules/admin/admin.module";
+import {BridgeModule} from "./endpoints/bridge/bridge.module";
+import {UserModule} from "./endpoints/user/user.module";
+import {AdminModule} from "./endpoints/admin/admin.module";
 
 @Module({
   imports: [
