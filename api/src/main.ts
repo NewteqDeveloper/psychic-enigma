@@ -1,9 +1,9 @@
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { JwtGuard } from './auth/guards/jwt.guard';
 
-dotenv.config({ path: ['.env', '../.env'] });
+config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

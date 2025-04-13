@@ -1,4 +1,5 @@
 // I want to export common auth things from here, so that the path is just import from 'auth'
-import { SecretAuthGuard } from './decos/secret-guard.deco';
+import { SecretAuthGuard } from './decos/secret.deco';
+import { AllowAnonymousGuard } from './decos/anon.deco';
 
-export { SecretAuthGuard };
+export { SecretAuthGuard, AllowAnonymousGuard };

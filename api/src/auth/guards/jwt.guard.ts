@@ -2,7 +2,8 @@ import { ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { AuthGuard } from '@nestjs/passport';
-import { ALLOW_SECRET_AUTH_KEY } from '../decos/secret-guard.deco';
+import { ALLOW_ANON_KEY } from '../decos/anon.deco';
+import {ALLOW_SECRET_AUTH_KEY} from "../decos/secret.deco";
 
 @Injectable()
 export class JwtGuard extends AuthGuard('jwt') {
@@ -13,14 +14,32 @@ export class JwtGuard extends AuthGuard('jwt') {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const isSecretGuard = this.reflector.getAllAndOverride<boolean>(
-      ALLOW_SECRET_AUTH_KEY,
-      [context.getHandler(), context.getClass()],
-    );
-    if (isSecretGuard) {
-      return true; // skip jwt auth, because we're using secrets
-    }
+    return this.canShortCircuit(context) || super.canActivate(context);
+  }
 
-    return super.canActivate(context);
+  private canShortCircuit(context: ExecutionContext): boolean {
+    if (this.hasAllowAnon(context)) {
+      return true;
+    } else return this.hasSecretGuard(context);
+  }
+
+  /*
+              if ture, will skip jwt auth, because we're using secrets to auth
+               */
+  private hasSecretGuard(context: ExecutionContext): boolean {
+    return this.reflector.getAllAndOverride<boolean>(ALLOW_SECRET_AUTH_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+  }
+
+  /*
+          For this, if we allow anon - like when signing in, we completely skip all auth
+           */
+  private hasAllowAnon(context: ExecutionContext): boolean {
+    return this.reflector.getAllAndOverride<boolean>(ALLOW_ANON_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
   }
 }

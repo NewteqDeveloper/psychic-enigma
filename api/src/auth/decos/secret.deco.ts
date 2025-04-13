@@ -1,5 +1,5 @@
 import { applyDecorators, SetMetadata, UseGuards } from '@nestjs/common';
-import {SecretGuard} from "../guards/secret.guard";
+import { SecretGuard } from '../guards/secret.guard';
 
 export const ALLOW_SECRET_AUTH_KEY = 'allow-secret-auth';
 
