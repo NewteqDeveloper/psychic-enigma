@@ -1,8 +1,5 @@
-import { DataSource, DataSourceOptions } from 'typeorm';
-import path from 'path';
 import process from 'node:process';
-// this import is key to getting the process.env to have the correct value
-import 'dotenv/config';
+import { DataSourceOptions } from 'typeorm';
 
 export const baseDbConfig: any = {
   type: 'postgres',
@@ -13,10 +10,10 @@ export const baseDbConfig: any = {
   database: process.env.DB_NAME,
   synchronize: false,
   logging: false,
+  schema: 'matrix',
 } as DataSourceOptions;
 
-export default new DataSource({
+export const migrationRunConfig: DataSourceOptions = {
   ...baseDbConfig,
-  entities: [path.join(__dirname, 'models/*.ts')],
-  migrations: [path.join(__dirname, 'migrations/*.ts')],
-});
+  schema: undefined,
+};

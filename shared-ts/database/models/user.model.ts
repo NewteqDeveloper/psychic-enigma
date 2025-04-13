@@ -1,16 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryColumn, Unique } from 'typeorm';
 import { Bridge } from './bridge.model';
 
+@Unique('uq_user', ['mxid'])
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn('identity')
-  id!: number;
-
-  @Column({ unique: true })
-  username!: string;
-
-  @Column({ unique: true })
-  email!: string;
+  @PrimaryColumn()
+  mxid!: string;
 
   @Column()
   password!: string;
