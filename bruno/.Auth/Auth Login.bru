@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{baseUri}}/auth
+  url: {{baseUri}}/auth/login
   body: json
   auth: none
 }
@@ -19,5 +19,5 @@ body:json {
 
 tests {
   var jsonData = res.getBody();
-  bru.setEnvVar("jwt", jsonData.access_token);
+  bru.setEnvVar("jwt", jsonData.accessToken);
 }

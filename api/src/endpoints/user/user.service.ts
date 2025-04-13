@@ -17,16 +17,19 @@ export class UserService {
     await this.userRepo.save(user);
   }
 
-  async assertUserCredentials(user: UserDto): Promise<User> {
+  async assertUserCredentials(
+    user: UserDto,
+    unAuthMessage: string,
+  ): Promise<User> {
     const currentUser = await this.userRepo.findOne({
       where: { mxid: user.mxid },
     });
     if (!currentUser) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(unAuthMessage);
     }
 
     if (!(await bcrypt.compare(user.password, currentUser.password))) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(unAuthMessage);
     }
 
     return currentUser;

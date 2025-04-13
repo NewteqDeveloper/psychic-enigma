@@ -1,11 +1,11 @@
 meta {
-  name: Ping
+  name: Pong
   type: http
-  seq: 1
+  seq: 2
 }
 
 get {
-  url: {{baseUri}}/user
+  url: {{baseUri}}/health-check/pong
   body: none
   auth: bearer
 }

@@ -1,12 +1,12 @@
-import { AutoController } from '@decos';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AllowAnonymousGuard } from '@auth';
 import { AuthService } from '../services/auth.service';
-import { Body, Get, Post } from '@nestjs/common';
 import { LoginDto } from '@shared-ts/dto/user.dto';
+import { AuthedDto } from '@shared-ts/dto/authed.dto';
 
+@Controller('auth/login')
 @AllowAnonymousGuard()
-@AutoController(AuthController)
-export class AuthController {
+export class AuthLoginController {
   constructor(private readonly authService: AuthService) {}
 
   @Get()
@@ -18,7 +18,7 @@ export class AuthController {
   }
 
   @Post()
-  signIn(@Body() payload: LoginDto) {
-    return this.authService.login(payload);
+  async login(@Body() userDetails: LoginDto): Promise<AuthedDto> {
+    return await this.authService.login(userDetails);
   }
 }
