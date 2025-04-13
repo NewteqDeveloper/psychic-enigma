@@ -3,10 +3,10 @@
   "version": "0.0.1-alpha",
   "description": "A matrix bridge assistant for multiple users on a home server",
   "scripts": {
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "migration:generate": "npm run typeorm -- migration:generate -d shared-ts/database/ormconfig.ts shared-ts/database/migrations/${NAME}",
-    "migration:run": "npm run typeorm -- migration:run -d shared-ts/database/ormconfig.ts",
-    "migration:revert": "npm run typeorm -- migration:revert -d shared-ts/database/ormconfig.ts"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:generate": "npm run typeorm migration:generate -- -d shared-ts/database/ormconfig.ts shared-ts/database/migrations/${NAME}",
+    "migration:run": "npm run typeorm migration:run -- -d shared-ts/database/ormconfig.ts",
+    "migration:revert": "npm run typeorm migration:revert -- -d shared-ts/database/ormconfig.ts"
   },
   "repository": {
     "type": "git",
