@@ -1,9 +1,22 @@
-import { DataSource } from 'typeorm';
-import databaseConfig from './config';
+import { DataSource, DataSourceOptions } from 'typeorm';
 import path from 'path';
+import process from 'node:process';
+// this import is key to getting the process.env to have the correct value
+import 'dotenv/config';
 
-export const EnigmaDataSource = new DataSource({
-  ...databaseConfig,
+export const baseDbConfig: DataSourceOptions = {
+  type: 'postgres',
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  synchronize: false,
+  logging: false,
+};
+
+export default new DataSource({
+  ...baseDbConfig,
   entities: [path.join(__dirname, 'models/*.ts')],
   migrations: [path.join(__dirname, 'migrations/*.ts')],
 });
