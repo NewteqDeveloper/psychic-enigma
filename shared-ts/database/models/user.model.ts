@@ -3,16 +3,16 @@ import { Bridge } from './bridge.model';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn({ name: 'user_pk' })
+  @PrimaryGeneratedColumn('identity')
   id!: number;
 
-  @Column({ nullable: false, unique: true })
+  @Column({ unique: true })
   username!: string;
 
-  @Column({ nullable: false, unique: true })
+  @Column({ unique: true })
   email!: string;
 
-  @Column({ nullable: false, unique: true })
+  @Column({ unique: true })
   password!: string;
 
   @OneToMany(() => Bridge, (bridge) => bridge.user)

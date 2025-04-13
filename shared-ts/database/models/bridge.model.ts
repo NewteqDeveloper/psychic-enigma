@@ -10,17 +10,12 @@ import { BridgeType, bridgeTypeValues } from '../types/bridge.type';
 
 @Entity()
 export class Bridge extends BaseEntity {
-  @PrimaryGeneratedColumn('identity', {
-    primaryKeyConstraintName: 'pk_bridge_id',
-  })
+  @PrimaryGeneratedColumn('identity')
   id!: number;
 
   @ManyToOne(() => User, (user) => user.bridges, { nullable: false })
   user!: User;
 
-  @Column({ nullable: false, type: 'enum', enum: bridgeTypeValues })
+  @Column({ type: 'enum', enum: bridgeTypeValues })
   type!: BridgeType;
-
-  @Column({ nullable: false, unique: true })
-  bridgePort!: number;
 }
