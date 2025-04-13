@@ -63,8 +63,8 @@ export class JwtAuthGuard implements CanActivate {
   }
 
   /*
-                                            if ture, will skip jwt auth, because we're using secrets to auth
-                                             */
+   * if ture, will skip jwt auth, because we're using secrets to auth
+   */
   private hasSecretGuard(context: ExecutionContext): boolean {
     return this.reflector.getAllAndOverride<boolean>(ALLOW_SECRET_AUTH_KEY, [
       context.getHandler(),
@@ -73,8 +73,8 @@ export class JwtAuthGuard implements CanActivate {
   }
 
   /*
-                                        For this, if we allow anon - like when signing in, we completely skip all auth
-                                         */
+   * For this, if we allow anon - like when signing in, we completely skip all auth
+   */
   private hasAllowAnon(context: ExecutionContext): boolean {
     return this.reflector.getAllAndOverride<boolean>(ALLOW_ANON_KEY, [
       context.getHandler(),
