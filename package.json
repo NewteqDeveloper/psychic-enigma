@@ -4,7 +4,7 @@
   "description": "A matrix bridge assistant for multiple users on a home server",
   "scripts": {
     "typeorm": "typeorm-ts-node-commonjs",
-    "migration:generate": "npm run typeorm migration:generate -- -d shared-ts/database/ormconfig.ts shared-ts/database/migrations/${NAME}",
+    "migration:generate": "MIGRATE_NAME=$(node -e \"import { generate } from 'random-words'; console.log(generate({exactly: 2, join: '-'}))\") && npm run typeorm migration:generate -- -d shared-ts/database/ormconfig.ts shared-ts/database/migrations/${MIGRATE_NAME}",
     "migration:run": "npm run typeorm migration:run -- -d shared-ts/database/ormconfig.ts",
     "migration:revert": "npm run typeorm migration:revert -- -d shared-ts/database/ormconfig.ts"
   },
@@ -38,6 +38,7 @@
     "@tsconfig/node22": "^22.0.1",
     "@types/node": "^22.14.1",
     "prettier": "^3.5.3",
+    "random-words": "^2.0.1",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0"
   }
