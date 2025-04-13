@@ -1,6 +1,7 @@
 import { AutoController } from '@decos';
 import { Get } from '@nestjs/common';
 import { AllowAnonymousGuard, UserProvider } from '@auth';
+import { UserRequest } from '../../models/auth/user.request';
 
 @AutoController(HealthCheckController)
 export class HealthCheckController {
@@ -13,10 +14,9 @@ export class HealthCheckController {
   }
 
   @Get('pong')
-  pong(@UserProvider() context: any) {
-    console.log('in controller, context', context);
+  pong(@UserProvider() context: UserRequest) {
     return {
-      pong: 'getting your info',
+      pong: context.mxid,
     };
   }
 }

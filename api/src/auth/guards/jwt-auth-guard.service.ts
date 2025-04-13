@@ -10,12 +10,15 @@ import { ALLOW_SECRET_AUTH_KEY } from '../decos/secret.deco';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { JwtModel } from '../../models/auth/jwt.model';
+import { UserService } from '../../endpoints/user/user.service';
+import { UserRequest } from '../../models/auth/user.request';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
   constructor(
     private readonly reflector: Reflector,
     private readonly jwtService: JwtService,
+    private readonly userService: UserService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -23,23 +26,23 @@ export class JwtAuthGuard implements CanActivate {
       return true;
     }
 
-    const request = context.switchToHttp().getRequest();
-    const token = this.getBearerToken(request);
-    if (!token) {
-      throw new UnauthorizedException();
-    }
+    const userRequest = context.switchToHttp().getRequest<UserRequest>();
+    const token = this.getBearerToken(userRequest);
     try {
       const payload = await this.jwtService.verifyAsync<JwtModel>(token, {
         secret: process.env.JWT_SECRET,
       });
-      console.log(payload.somethingElse);
       // attach all the user information to the context here
+      userRequest.mxid = payload.sub;
     } catch {
+      /*
+       * an exception could be thrown for various reason, token expired, token invalid, etc.
+       * It doesn't really matter what the exception is, because, it's invalid, so we just don't allow them through
+       */
       throw new UnauthorizedException();
     }
 
     return true;
-    //return super.canActivate(context);
   }
 
   private getBearerToken(request: Request): string {
