@@ -1,0 +1,4 @@
+bridge:
+  enabled: true
+  username: bot
+  custom_shit: ":::2222:::"

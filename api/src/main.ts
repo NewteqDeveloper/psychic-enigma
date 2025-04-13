@@ -3,7 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { JwtGuard } from './auth/guards/jwt.guard';
 
-dotenv.config();
+dotenv.config({ path: ['.env', '../.env'] });
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
