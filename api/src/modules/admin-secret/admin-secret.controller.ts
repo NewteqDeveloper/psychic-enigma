@@ -1,10 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import { Get } from '@nestjs/common';
 import { AdminSecretService } from './admin-secret.service';
-import { ControllerFromClassName } from '@decos';
+import { AutoController } from '@decos';
 import { SecretAuthGuard } from '@auth';
 
 @SecretAuthGuard()
-@Controller(ControllerFromClassName(AdminSecretController))
+@AutoController(AdminSecretController)
 export class AdminSecretController {
   constructor(private readonly userService: AdminSecretService) {}
 

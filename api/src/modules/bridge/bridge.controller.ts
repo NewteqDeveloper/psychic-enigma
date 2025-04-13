@@ -1,8 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Get } from '@nestjs/common';
 import { BridgeService } from './bridge.service';
-import { ControllerFromClassName } from '@decos';
+import { AutoController } from '@decos';
 
-@Controller(ControllerFromClassName(BridgeController))
+@AutoController(BridgeController)
 export class BridgeController {
   constructor(private readonly bridgeService: BridgeService) {}
 

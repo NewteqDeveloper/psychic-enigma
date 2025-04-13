@@ -1,3 +1,3 @@
-import { ControllerFromClassName } from './controller-from-file-name';
+import { AutoController } from './auto.controller';
 
-export { ControllerFromClassName };
+export { AutoController };

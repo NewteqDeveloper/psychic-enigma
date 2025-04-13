@@ -1,8 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Get } from '@nestjs/common';
 import { UserService } from './user.service';
-import { ControllerFromClassName } from '@decos';
+import { AutoController } from '@decos';
 
-@Controller(ControllerFromClassName(UserController))
+@AutoController(UserController)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
