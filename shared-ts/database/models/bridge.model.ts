@@ -4,7 +4,7 @@ import { BridgeType, bridgeTypeValues } from '../types/bridge.type';
 
 @Entity()
 export class Bridge {
-  @PrimaryGeneratedColumn('identity')
+  @PrimaryGeneratedColumn({ primaryKeyConstraintName: 'bridge_port' })
   port!: number;
 
   @ManyToOne(() => User, (user) => user.bridges)
