@@ -1,5 +1,7 @@
 import process from 'node:process';
 import { DataSourceOptions } from 'typeorm';
+// this import is key to getting the process.env to have the correct value
+import 'dotenv/config';
 
 export const baseDbConfig: any = {
   type: 'postgres',
