@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { UserService } from './user.service';
-import { ControllerFromClassName } from '../../decos/controller-from-file-name';
+import { ControllerFromClassName } from '@decos';
 
 @Controller(ControllerFromClassName(UserController))
 export class UserController {

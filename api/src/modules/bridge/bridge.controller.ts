@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { BridgeService } from './bridge.service';
-import { ControllerFromClassName } from '../../decos/controller-from-file-name';
+import { ControllerFromClassName } from '@decos';
 
 @Controller(ControllerFromClassName(BridgeController))
 export class BridgeController {

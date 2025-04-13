@@ -21,6 +21,12 @@
     "paths": {
       "@shared-ts/*": [
         "../shared-ts/*"
+      ],
+      "@decos": [
+        "src/decos"
+      ],
+      "@auth": [
+        "src/auth"
       ]
     }
   }
