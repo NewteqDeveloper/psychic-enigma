@@ -11,5 +11,13 @@ post {
 }
 
 body:json {
-  {{user-dto}}
+  {
+    "mxid": "{{username}}",
+    "password": "{{user_password}}"
+  }
+}
+
+tests {
+  var jsonData = res.getBody();
+  bru.setEnvVar("jwt", jsonData.access_token);
 }
