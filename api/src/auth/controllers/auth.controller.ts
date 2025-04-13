@@ -1,7 +1,8 @@
 import { AutoController } from '@decos';
 import { AllowAnonymousGuard } from '@auth';
 import { AuthService } from '../services/auth.service';
-import { Get } from '@nestjs/common';
+import { Body, Get, Post } from '@nestjs/common';
+import { LoginDto } from '@shared-ts/dto/user.dto';
 
 @AllowAnonymousGuard()
 @AutoController(AuthController)
@@ -14,5 +15,10 @@ export class AuthController {
       ping: new Date().getTime(),
       message: 'The lights are on 💡',
     };
+  }
+
+  @Post()
+  signIn(@Body() payload: LoginDto) {
+    return this.authService.login(payload);
   }
 }

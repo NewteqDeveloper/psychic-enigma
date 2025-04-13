@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '@shared-ts/database/models/user.model';
 import bcrypt from 'bcrypt';
-import { CreateUserDto } from '@shared-ts/dto/user.dto';
+import { CreateUserDto, UserDto } from '@shared-ts/dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -15,5 +15,20 @@ export class UserService {
       password: await bcrypt.hash(password, 10),
     });
     await this.userRepo.save(user);
+  }
+
+  async assertUserCredentials(user: UserDto): Promise<User> {
+    const currentUser = await this.userRepo.findOne({
+      where: { mxid: user.mxid },
+    });
+    if (!currentUser) {
+      throw new UnauthorizedException();
+    }
+
+    if (!(await bcrypt.compare(user.password, currentUser.password))) {
+      throw new UnauthorizedException();
+    }
+
+    return currentUser;
   }
 }

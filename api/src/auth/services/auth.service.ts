@@ -1,14 +1,24 @@
 import { JwtService } from '@nestjs/jwt';
 import { Injectable } from '@nestjs/common';
+import { LoginDto } from '@shared-ts/dto/user.dto';
+import { UserService } from '../../endpoints/user/user.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
+    private userService: UserService,
+  ) {}
 
-  async login(user: any) {
-    const payload = { username: user.username, sub: user.id };
+  async login(userDetails: LoginDto) {
+    const { mxid } = await this.userService.assertUserCredentials(userDetails);
+
+    const payload = { username: 'coming soon', sub: mxid };
+
+    const jwt = await this.jwtService.signAsync(payload);
+
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: jwt,
     };
   }
 }
