@@ -4,7 +4,7 @@ import { BridgeModule } from './modules/bridge/bridge.module';
 import { UserModule } from './modules/user/user.module';
 import { baseDbConfig } from '@shared-ts/database/ormconfig';
 import { AuthModule } from './auth/auth.module';
-import { AdminSecretModule } from './modules/admin-secret/admin-secret.module';
+import {AdminModule} from "./modules/admin/admin.module";
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import { AdminSecretModule } from './modules/admin-secret/admin-secret.module';
     BridgeModule,
     UserModule,
     AuthModule,
-    AdminSecretModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [],

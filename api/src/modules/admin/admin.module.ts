@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
-import { AdminSecretController } from './admin-secret.controller';
-import { AdminSecretService } from './admin-secret.service';
+import { AdminController } from './admin.controller';
+import { AdminService } from './admin.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Bridge } from '@shared-ts/database/models/bridge.model';
 import { User } from '@shared-ts/database/models/user.model';
+import {UserService} from "../user/user.service";
 
 @Module({
   imports: [TypeOrmModule.forFeature([Bridge, User])],
-  controllers: [AdminSecretController],
-  providers: [AdminSecretService],
+  controllers: [AdminController],
+  providers: [AdminService, UserService],
 })
-export class AdminSecretModule {}
+export class AdminModule {}

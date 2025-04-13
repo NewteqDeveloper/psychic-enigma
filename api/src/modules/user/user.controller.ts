@@ -8,7 +8,6 @@ export class UserController {
 
   @Get()
   async getHello() {
-    await this.userService.createUser('newt');
     return {
       message: 'Done',
     };
