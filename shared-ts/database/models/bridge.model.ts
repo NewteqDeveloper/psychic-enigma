@@ -1,15 +1,9 @@
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.model';
 import { BridgeType, bridgeTypeValues } from '../types/bridge.type';
 
 @Entity()
-export class Bridge extends BaseEntity {
+export class Bridge {
   @PrimaryGeneratedColumn('identity')
   id!: number;
 
