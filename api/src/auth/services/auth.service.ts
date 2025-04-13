@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { LoginDto } from '@shared-ts/dto/user.dto';
 import { UserService } from '../../endpoints/user/user.service';
 import { AuthedDto } from '@shared-ts/dto/authed.dto';
+import { JwtModel } from '../../models/auth/jwt.model';
 
 @Injectable()
 export class AuthService {
@@ -17,9 +18,13 @@ export class AuthService {
       'The lights are off 🚨',
     );
 
-    const payload = { username: 'coming soon', sub: mxid };
+    const jwtPayload: JwtModel = {
+      username: 'coming soon',
+      sub: mxid,
+      somethingElse: 'testing',
+    };
 
-    const jwt = await this.jwtService.signAsync(payload);
+    const jwt = await this.jwtService.signAsync(jwtPayload);
 
     return {
       accessToken: jwt,

@@ -1,6 +1,6 @@
 import { AutoController } from '@decos';
 import { Get } from '@nestjs/common';
-import { AllowAnonymousGuard, UserContext } from '@auth';
+import { AllowAnonymousGuard, UserProvider } from '@auth';
 
 @AutoController(HealthCheckController)
 export class HealthCheckController {
@@ -13,7 +13,7 @@ export class HealthCheckController {
   }
 
   @Get('pong')
-  pong(@UserContext() context: any) {
+  pong(@UserProvider() context: any) {
     console.log('in controller, context', context);
     return {
       pong: 'getting your info',
